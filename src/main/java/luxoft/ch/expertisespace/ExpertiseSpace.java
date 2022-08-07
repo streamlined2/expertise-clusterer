@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class ExpertiseSpace {
 
@@ -45,11 +46,28 @@ public class ExpertiseSpace {
 			BitSet set = entry.getValue();
 			for (int index = set.nextSetBit(0); index >= 0; index = set.nextSetBit(index + 1)) {
 				out.print(getTokenByIndex(index));
-				out.print(", ");
+				if (set.nextSetBit(index + 1) >= 0) {
+					out.print(", ");
+				}
 			}
 			out.println();
 		}
 		out.flush();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for (var entry : expertiseMap.entrySet()) {
+			builder.append(entry.getKey()).append(": ");
+			StringJoiner join = new StringJoiner(", ");
+			BitSet set = entry.getValue();
+			for (int index = set.nextSetBit(0); index >= 0; index = set.nextSetBit(index + 1)) {
+				join.add(getTokenByIndex(index));
+			}
+			builder.append(join).append('\n');
+		}
+		return builder.toString();
 	}
 
 	public static void main(String... args) {
