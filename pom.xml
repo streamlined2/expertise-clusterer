@@ -7,9 +7,9 @@
 	<description>Program parses list of employee skills and groups persons with similar expertise in clusters</description>
 
 	<properties>
-		<maven.compiler.target>18</maven.compiler.target>
-		<maven.compiler.source>18</maven.compiler.source>
-		<java.version>18</java.version>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<java.version>17</java.version>
 		<slf4j.version>1.7.36</slf4j.version>
 	</properties>
 
