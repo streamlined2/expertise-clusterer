@@ -1,0 +1,161 @@
+Role ID;Key skills
+ROLE-1;Java, MySQL, PostgreSQL, Python
+ROLE-2;Java, MongoDB, REST, Spring Boot, SQL
+ROLE-3;Java, Spring Boot
+ROLE-4;Hibernate, Java, Oracle, Spring Framework, SQL
+ROLE-5;Java, Concurrent Programming, Hibernate, Manual Testing, RabbitMQ, Spring Framework
+ROLE-6;Angular, Hibernate, Java, Spring Framework
+ROLE-7;Angular, Java
+ROLE-8;AWS, BigData, Java
+ROLE-9;Cloud - Software Tools - Other, Java, Microservices, TDD methodology
+ROLE-10;Java, Microservices, Multithreading, Spring Boot
+ROLE-11;Java 2 Enterprise Edition, Kubernetes, RESTful, Spring Boot, Spring Framework
+ROLE-12;Angular, Java
+ROLE-13;Java, Web Servers
+ROLE-14;Java, Web Servers
+ROLE-15;Java, Linux, Troubleshooting
+ROLE-16;Java, Web Servers
+ROLE-17;AngularJS, Apache Maven, Big Data, Java, RESTful
+ROLE-18;Java, Spring Boot
+ROLE-19;Java, MongoDB, REST, Spring Boot, SQL
+ROLE-20;Java, Microservices, Spring Boot
+ROLE-21;Jasper, Java, Spring Boot
+ROLE-22;Java, Spring Framework
+ROLE-23;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-24;Java, SQL
+ROLE-25;Apache Kafka, Java, Kafa, Kafka Streams, Kotlin
+ROLE-26;Angular, Java, Microservices, React, Spring Boot
+ROLE-27;FIX, Java, Microservices, Spring Framework
+ROLE-28;Java, Oracle, SQL
+ROLE-29;Java 11, Message Broker, Microservices, REST API, Spring Boot
+ROLE-30;Java, Python
+ROLE-31;Java, Web Services
+ROLE-32;Google Cloud Spanner, Java, Kubernetes, Microservices, RabbitMQ
+ROLE-33;Java, Spring Boot, SQL
+ROLE-34;Full Stack, Java
+ROLE-35;Java, Spring Boot
+ROLE-36;Hibernate, Java 11, REST API, Spring Framework, SQL
+ROLE-37;Java, Microservices
+ROLE-38;Java 8, REST, Spring Boot
+ROLE-39;Java, Microservices, REST WS, Spring Boot, Spring Security
+ROLE-40;Back End, Java, JPA, Spring Framework, SQL
+ROLE-41;Java, Angular8, Bootstrap, Front End, REST API, Sass
+ROLE-42;Apache Kafka, Java 8, Spring Boot
+ROLE-43;Java, REST API, Spring Boot, Spring MVC
+ROLE-44;Full Stack, Java
+ROLE-45;Java, JScript, React
+ROLE-46;Hibernate, Java, Microservices, Spring Boot, Spring Framework
+ROLE-47;Apache Maven, Hibernate, Java, Oracle, Spring Framework
+ROLE-48;BDD (Behavior Driven Development), Java 8, Spring Framework, TDD methodology
+ROLE-49;Java 8, Kafka Streams, Oracle, Spring Boot, SQL
+ROLE-50;Cloud, Java, Microservices, SQL
+ROLE-51;Adobe Experience Manager (AEM), Java
+ROLE-52;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-53;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-54;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-55;Java, PrimeFaces
+ROLE-56;Apache Maven, Java, Microservices, Spring Boot, Spring Framework
+ROLE-57;Apache Camel, Java, Java 2 Enterprise Edition, JPA Hibernate, JSON
+ROLE-58;Java, Web Services
+ROLE-59;Java 2 Enterprise Edition, Microservices, REST API, Spring Boot
+ROLE-60;Full Stack, Java 11, Microservices
+ROLE-61;Java, Kubernetes, Python
+ROLE-62;Java, Oracle, Spring Boot
+ROLE-63;Google Cloud Platform (GCP), Java, Oracle, Spring Boot
+ROLE-64;Google Cloud Platform (GCP), Java, Oracle, Spring Boot
+ROLE-65;Java, Python
+ROLE-66;Automation QA, Java, Linux
+ROLE-67;ETL, Hadoop, Java, Presto, Python
+ROLE-68;Angular, Java
+ROLE-69;Java, Mule ESB, Spring Framework
+ROLE-70;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-71;Java, Microservices
+ROLE-72;Java, Spring Boot
+ROLE-73;Hibernate, Java 11, REST API, Spring Framework, SQL
+ROLE-74;Java, JMS Servers, Oracle, REST API, Spring Boot
+ROLE-75;Java, Microservices, Spring Boot
+ROLE-76;Java, Spring Framework
+ROLE-77;Apache Kafka, Java, Scala, Spring Rest
+ROLE-78;Intelij Idea, Java, Object Oriented Analysis/Design, Object-Oriented Programming (OOP), Unit Testing
+ROLE-79;Java 2 Enterprise Edition, Microservices, REST API, Spring Boot
+ROLE-80;Full Stack, Java 11, Microservices
+ROLE-81;Cloud, Hibernate, Java, Spring Framework, SQL
+ROLE-82;Continuous Integration, Hibernate, Java, Scrum Methodology, Spring Boot
+ROLE-83;Automation QA, Java, JSON
+ROLE-84;Automation QA, Java, JSON
+ROLE-85;Apache Kafka, Java 8, Spring Boot
+ROLE-86;Java, MySQL, PostgreSQL, Python
+ROLE-87;Java, MySQL, PostgreSQL, Python
+ROLE-88;Java, REST API, Spring Boot, Spring MVC
+ROLE-89;Java, MongoDB
+ROLE-90;Java, MongoDB
+ROLE-91;Java, MongoDB, REST, Spring Framework, SQL
+ROLE-92;Cucumber, Git, Java, Jenkins, Shell Scripting
+ROLE-93;Java, Spring MVC, Web Services
+ROLE-94;Apache Kafka, Java, Scala, Spring Rest
+ROLE-95;Java 11, Java
+ROLE-96;Apache Tomcat, Java, Jenkins, SQL, UNIX
+ROLE-97;Apache Tomcat, Java, JMS Servers, SQL, UNIX
+ROLE-98;Java, Spring Boot, SQL
+ROLE-99;Java, REST, Spring Boot, SQL
+ROLE-100;Java, Oracle, Spring Framework, SQL
+ROLE-101;ETL, Infrormatica ETL, Java
+ROLE-102;Java, Linux, Network Programming, UNIX
+ROLE-103;Full Stack, Java 11, Microservices
+ROLE-104;Hibernate, Java 8, Microservices, Oracle, Spring Boot
+ROLE-105;Java, Microservices, Spring Boot
+ROLE-106;Java, Microservices, Spring Boot
+ROLE-107;Java, Spring Boot, SQL
+ROLE-108;ETL, Java, SQL
+ROLE-109;CI/CD, Java, Microservices, Spring Boot
+ROLE-110;Docker, Java, Kubernetes, Microservices, Spring Boot
+ROLE-111;Full Stack, Java 11, Microservices
+ROLE-112;Java, Kubernetes, Microservices, MySQL, Spring Boot
+ROLE-113;Full Stack, Java 11, Microservices
+ROLE-114;Java, Oracle, Spring Boot
+ROLE-115;Java, JSON, Oracle, Solace Messaging, Web Services
+ROLE-116;Java, JavaScript, Web Application Development, Web Services
+ROLE-117;Apache Maven, Java, Microservices, Spring Boot, Spring Framework
+ROLE-118;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-119;Java, Java Message Service (JMS), Oracle, Spring Framework
+ROLE-120;Git, Java
+ROLE-121;Integration, Java
+ROLE-122;Java, MongoDB, REST, Spring Framework, SQL
+ROLE-123;Java, MongoDB, REST, Spring Framework, SQL
+ROLE-124;Java, Oracle, Spring Framework, SQL Databases
+ROLE-125;AWS, Java
+ROLE-126;Java 8, Microservices, Solution Architecture, Spring Boot
+ROLE-127;Continuous Integration, Hibernate, Java, Scrum Methodology, Spring Boot
+ROLE-128;Java, PrimeFaces, Spring Boot
+ROLE-129;Java, Spring Boot
+ROLE-130;Java RMI, Java SDK, JavaScript, Spring Rest, SQL
+ROLE-131;Java, Multithreading
+ROLE-132;Java, Oracle, REST API, Spring Boot
+ROLE-133;Apache Maven, Java, Mock, Unit Testing, Web Services
+ROLE-134;Java, JPA, ORM, Spring Boot
+ROLE-135;Java, Oracle, Spring Framework, SQL
+ROLE-136;IBM MQ, Java EE, Kotlin developer
+ROLE-137;IBM UrbanCode Deploy, Java, JUnit, Spring Boot, SQL
+ROLE-138;Java, Apache Kafka, Hibernate, Microservices, Oracle, Spring Boot
+ROLE-139;Git, Java, Microservices, Spring Framework, SQL
+ROLE-140;Full Stack, Java, SQL
+ROLE-141;Java, SQL, Troubleshooting
+ROLE-142;Investment Banking, Java, Multithreading, SQL, UNIX
+ROLE-143;DevOps, Java, Java 8
+ROLE-144;Java, Kafa
+ROLE-145;Automation QA, Java, JSON
+ROLE-146;Java, PL/SQL
+ROLE-147;Git, Java, Java Collections API, Shell Scripting, Unit Testing
+ROLE-148;Full Stack, Java
+ROLE-149;Full Stack, Java
+ROLE-150;Java, Multithreading
+ROLE-151;Java, Microservices, PostgreSQL, REST, Spring Boot
+ROLE-152;Full Stack, Java
+ROLE-153;Java, Spring Framework
+ROLE-154;Java, Angular, Ansible, Kubernetes, React
+ROLE-155;Hibernate, Java 11, Microservices, Oracle, Spring Boot
+ROLE-156;Java, Spring Boot, Spring Data, Spring Rest, SQL
+ROLE-157;Apache Kafka, Elasticsearch, Java 11, Microservices, REST
+ROLE-158;Apache Kafka, Java 8, Microservices, Spring Boot
+ROLE-159;Java, JavaScript, Web Application Development, Web Services
+ROLE-160;Intelij Idea, Java, Object Oriented Analysis/Design, Object-Oriented Programming (OOP), Unit Testing
