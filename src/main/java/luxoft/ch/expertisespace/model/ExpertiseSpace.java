@@ -1,6 +1,7 @@
 package luxoft.ch.expertisespace.model;
 
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,10 @@ public class ExpertiseSpace {
 	public ExpertiseSpace() {
 		expertiseTokens = new HashMap<>();
 		roleSet = new TreeSet<>();
+	}
+
+	public Set<Role> getRoles() {
+		return Collections.unmodifiableSet(roleSet);
 	}
 
 	public void addRole(String role, List<String> tokens) {
@@ -40,10 +45,10 @@ public class ExpertiseSpace {
 	}
 
 	private void print(PrintWriter out) {
-		for (var entry : roleSet) {
-			out.print(entry.getRole());
+		for (var role : roleSet) {
+			out.print(role.getName());
 			out.print(": ");
-			for (var i = entry.iterator(); i.hasNext();) {
+			for (var i = role.getPoint().iterator(); i.hasNext();) {
 				out.print(getTokenByIndex(i.next()));
 				if (i.hasNext()) {
 					out.print(", ");
@@ -57,10 +62,10 @@ public class ExpertiseSpace {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		for (var entry : roleSet) {
-			builder.append(entry.getRole()).append(": ");
+		for (var role : roleSet) {
+			builder.append(role.getName()).append(": ");
 			StringJoiner join = new StringJoiner(", ");
-			for (var index : entry) {
+			for (var index : role.getPoint()) {
 				join.add(getTokenByIndex(index));
 			}
 			builder.append(join).append('\n');
