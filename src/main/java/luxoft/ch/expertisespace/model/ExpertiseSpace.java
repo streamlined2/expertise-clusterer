@@ -1,20 +1,21 @@
-package luxoft.ch.expertisespace;
+package luxoft.ch.expertisespace.model;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringJoiner;
+import java.util.TreeSet;
 
 public class ExpertiseSpace {
 
 	private final Map<String, Integer> expertiseTokens;
-	private final Map<String, Point> expertiseMap;
+	private final Set<Role> roleSet;
 
 	public ExpertiseSpace() {
 		expertiseTokens = new HashMap<>();
-		expertiseMap = new LinkedHashMap<>();
+		roleSet = new TreeSet<>();
 	}
 
 	public void addRole(String role, List<String> tokens) {
@@ -23,9 +24,9 @@ public class ExpertiseSpace {
 	}
 
 	private void addExpertiseSetForRole(String role, List<String> tokens) {
-		Point point = new Point(expertiseTokens.size());
+		Role point = new Role(role, expertiseTokens.size());
 		tokens.forEach(token -> point.set(expertiseTokens.get(token)));
-		expertiseMap.put(role, point);
+		roleSet.add(point);
 	}
 
 	private void addExpertiseTokens(List<String> tokens) {
@@ -39,10 +40,10 @@ public class ExpertiseSpace {
 	}
 
 	private void print(PrintWriter out) {
-		for (var entry : expertiseMap.entrySet()) {
-			out.print(entry.getKey());
+		for (var entry : roleSet) {
+			out.print(entry.getRole());
 			out.print(": ");
-			for (var i = entry.getValue().iterator(); i.hasNext();) {
+			for (var i = entry.iterator(); i.hasNext();) {
 				out.print(getTokenByIndex(i.next()));
 				if (i.hasNext()) {
 					out.print(", ");
@@ -56,10 +57,10 @@ public class ExpertiseSpace {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		for (var entry : expertiseMap.entrySet()) {
-			builder.append(entry.getKey()).append(": ");
+		for (var entry : roleSet) {
+			builder.append(entry.getRole()).append(": ");
 			StringJoiner join = new StringJoiner(", ");
-			for (var index : entry.getValue()) {
+			for (var index : entry) {
 				join.add(getTokenByIndex(index));
 			}
 			builder.append(join).append('\n');

@@ -1,4 +1,4 @@
-package luxoft.ch.expertisespace;
+package luxoft.ch.expertisespace.model;
 
 public class NoExpertiseTokenException extends RuntimeException {
 

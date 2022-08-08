@@ -1,4 +1,6 @@
-package luxoft.ch.expertisespace;
+package luxoft.ch.expertisespace.clustering;
+
+import luxoft.ch.expertisespace.model.ExpertiseSpace;
 
 public class Distributor {
 

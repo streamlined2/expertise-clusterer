@@ -1,4 +1,4 @@
-package luxoft.ch.expertisespace;
+package luxoft.ch.expertisespace.parsing;
 
 public class ParseException extends RuntimeException {
 

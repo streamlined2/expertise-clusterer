@@ -1,4 +1,4 @@
-package luxoft.ch.expertisespace;
+package luxoft.ch.expertisespace.parsing;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+
+import luxoft.ch.expertisespace.model.ExpertiseSpace;
 
 public class Parser {
 
