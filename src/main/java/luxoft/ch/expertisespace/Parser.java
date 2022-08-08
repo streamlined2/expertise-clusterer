@@ -12,7 +12,9 @@ import java.util.stream.Stream;
 
 public class Parser {
 
-	private String fileName;
+	private static final Pattern EXPERTISE_SEPARATOR = Pattern.compile(",\s*");
+
+	private final String fileName;
 
 	public Parser(String fileName) {
 		this.fileName = fileName;
@@ -28,8 +30,6 @@ public class Parser {
 			throw new ParseException("can't read file %s".formatted(fileName), e);
 		}
 	}
-
-	private static final Pattern EXPERTISE_SEPARATOR = Pattern.compile(",\s*");
 
 	private void addLine(ExpertiseSpace space, String line) {
 		try {

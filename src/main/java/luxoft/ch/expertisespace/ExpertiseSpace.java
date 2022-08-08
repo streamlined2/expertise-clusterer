@@ -1,7 +1,6 @@
 package luxoft.ch.expertisespace;
 
 import java.io.PrintWriter;
-import java.util.BitSet;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.StringJoiner;
 public class ExpertiseSpace {
 
 	private final Map<String, Integer> expertiseTokens;
-	private final Map<String, BitSet> expertiseMap;
+	private final Map<String, Point> expertiseMap;
 
 	public ExpertiseSpace() {
 		expertiseTokens = new HashMap<>();
@@ -24,9 +23,9 @@ public class ExpertiseSpace {
 	}
 
 	private void addExpertiseSetForRole(String role, List<String> tokens) {
-		BitSet expertiseSet = new BitSet(expertiseTokens.size());
-		tokens.forEach(token -> expertiseSet.set(expertiseTokens.get(token)));
-		expertiseMap.put(role, expertiseSet);
+		Point point = new Point(expertiseTokens.size());
+		tokens.forEach(token -> point.set(expertiseTokens.get(token)));
+		expertiseMap.put(role, point);
 	}
 
 	private void addExpertiseTokens(List<String> tokens) {
@@ -43,10 +42,9 @@ public class ExpertiseSpace {
 		for (var entry : expertiseMap.entrySet()) {
 			out.print(entry.getKey());
 			out.print(": ");
-			BitSet set = entry.getValue();
-			for (int index = set.nextSetBit(0); index >= 0; index = set.nextSetBit(index + 1)) {
-				out.print(getTokenByIndex(index));
-				if (set.nextSetBit(index + 1) >= 0) {
+			for (var i = entry.getValue().iterator(); i.hasNext();) {
+				out.print(getTokenByIndex(i.next()));
+				if (i.hasNext()) {
 					out.print(", ");
 				}
 			}
@@ -61,8 +59,7 @@ public class ExpertiseSpace {
 		for (var entry : expertiseMap.entrySet()) {
 			builder.append(entry.getKey()).append(": ");
 			StringJoiner join = new StringJoiner(", ");
-			BitSet set = entry.getValue();
-			for (int index = set.nextSetBit(0); index >= 0; index = set.nextSetBit(index + 1)) {
+			for (var index : entry.getValue()) {
 				join.add(getTokenByIndex(index));
 			}
 			builder.append(join).append('\n');
