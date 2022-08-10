@@ -44,4 +44,9 @@ public class Role implements Comparable<Role> {
 		return name.compareToIgnoreCase(p.name);
 	}
 
+	@Override
+	public String toString() {
+		return "name=%s%s".formatted(name, point.toString());
+	}
+
 }

@@ -27,10 +27,6 @@ public class Point implements Iterable<Integer> {
 		bitSet.set(index);
 	}
 
-	public void addPoint(Point point) {
-		bitSet.or(point.bitSet);
-	}
-
 	public int getDistance(Point point) {
 		BitSet clone = (BitSet) bitSet.clone();
 		clone.xor(point.bitSet);

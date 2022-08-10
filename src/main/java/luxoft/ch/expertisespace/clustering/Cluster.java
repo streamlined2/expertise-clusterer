@@ -2,15 +2,17 @@ package luxoft.ch.expertisespace.clustering;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.function.BinaryOperator;
 
 import luxoft.ch.expertisespace.model.Point;
 import luxoft.ch.expertisespace.model.Role;
 
-public class Cluster {
+public class Cluster implements Iterable<Role> {
 
 	private static final BinaryOperator<Integer> ACCUMULATOR = (oldValue, value) -> oldValue + value;
 
@@ -57,6 +59,42 @@ public class Cluster {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("cluster ").append(id).append(": ");
+		StringJoiner join = new StringJoiner(",", "[", "]");
+		for (var role : roles) {
+			join.add(role.toString());
+		}
+		builder.append(join);
+		return builder.toString();
+	}
+
+	@Override
+	public Iterator<Role> iterator() {
+		return new Iterator<Role>() {
+
+			private final Iterator<Role> iterator = roles.iterator();
+
+			@Override
+			public boolean hasNext() {
+				return iterator.hasNext();
+			}
+
+			@Override
+			public Role next() {
+				return iterator.next();
+			}
+
+			@Override
+			public void remove() {
+				iterator.remove();
+			}
+
+		};
 	}
 
 	public static void main(String... args) {

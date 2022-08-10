@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class ExpertiseSpace {
 
@@ -21,6 +22,14 @@ public class ExpertiseSpace {
 
 	public Set<Role> getRoles() {
 		return Collections.unmodifiableSet(roleSet);
+	}
+
+	public String getExpertiseTokens() {
+		return expertiseTokens.keySet().stream().collect(Collectors.joining(",", "{", "}"));
+	}
+
+	public int getExpertiseTokenCount() {
+		return expertiseTokens.size();
 	}
 
 	public void addRole(String role, List<String> tokens) {
@@ -44,7 +53,7 @@ public class ExpertiseSpace {
 						"can't find expertise token for index %d".formatted(index)));
 	}
 
-	private void print(PrintWriter out) {
+	public void print(PrintWriter out) {
 		for (var role : roleSet) {
 			out.print(role.getName());
 			out.print(": ");
