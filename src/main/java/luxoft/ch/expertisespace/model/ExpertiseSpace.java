@@ -82,15 +82,4 @@ public class ExpertiseSpace {
 		return builder.toString();
 	}
 
-	public static void main(String... args) {
-		ExpertiseSpace space = new ExpertiseSpace();
-		space.addRole("ROLE-1", List.of("Java", "MySQL", "PostgreSQL", "Python"));
-		space.addRole("ROLE-2", List.of("Java", "MongoDB", "REST", "Spring Boot", "SQL"));
-		space.addRole("ROLE-3", List.of("Java", "Spring Boot", "PostgreSQL", "Python"));
-		space.addRole("ROLE-4", List.of("Hibernate", "Java", "Oracle", "Spring Framework", "SQL"));
-		space.addRole("ROLE-5", List.of("Java", "Concurrent Programming", "Hibernate", "Manual Testing", "RabbitMQ",
-				"Spring Framework"));
-		space.print(new PrintWriter(System.out));
-	}
-
 }

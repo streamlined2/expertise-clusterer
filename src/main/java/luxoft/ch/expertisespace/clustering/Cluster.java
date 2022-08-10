@@ -1,5 +1,6 @@
 package luxoft.ch.expertisespace.clustering;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,6 +23,12 @@ public class Cluster implements Iterable<Role> {
 	public Cluster(int id) {
 		this.id = id;
 		roles = new HashSet<>();
+	}
+
+	public Cluster(int id, String... roleName) {
+		this.id = id;
+		roles = new HashSet<>();
+		Arrays.asList(roleName).stream().map(Role::new).forEach(this::addRole);
 	}
 
 	public void addRole(Role role) {
@@ -95,27 +102,6 @@ public class Cluster implements Iterable<Role> {
 			}
 
 		};
-	}
-
-	public static void main(String... args) {
-		Cluster cluster = new Cluster(0);
-		Role role1 = new Role("role1", 3);
-		role1.set(0);
-		role1.set(2);
-		// role1.set(1);
-		Role role2 = new Role("role2", 3);
-		role2.set(1);
-		role2.set(2);
-		// role2.set(0);
-		Role role3 = new Role("role3", 3);
-		role3.set(1);
-		role3.set(0);
-		// role3.set(2);
-		cluster.addRole(role1);
-		cluster.addRole(role2);
-		cluster.addRole(role3);
-		Point centroid = cluster.getCentroid();
-		System.out.println(centroid);
 	}
 
 }

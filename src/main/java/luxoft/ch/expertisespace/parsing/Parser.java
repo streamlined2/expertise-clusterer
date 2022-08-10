@@ -56,9 +56,4 @@ public class Parser {
 
 	}
 
-	public static void main(String... args) {
-		Parser parser = new Parser("Java Flavors.csv");
-		System.out.println(parser.parse());
-	}
-
 }

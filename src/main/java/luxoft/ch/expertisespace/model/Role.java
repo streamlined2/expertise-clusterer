@@ -7,6 +7,13 @@ public class Role implements Comparable<Role> {
 	private final String name;
 	private final Point point;
 
+	public Role(String name) {
+		if (name == null || name.isBlank())
+			throw new IllegalArgumentException("role name should not be null or empty");
+		this.name = name;
+		point = new Point();
+	}
+
 	public Role(String name, int dimension) {
 		if (name == null || name.isBlank())
 			throw new IllegalArgumentException("role name should not be null or empty");
