@@ -10,6 +10,7 @@ import luxoft.ch.expertisespace.model.ExpertiseSpace;
 import luxoft.ch.expertisespace.model.Point;
 import luxoft.ch.expertisespace.model.Role;
 import luxoft.ch.expertisespace.parsing.Parser;
+import luxoft.ch.expertisespace.validation.SolutionValidator;
 
 public class Distributor {
 
@@ -30,11 +31,11 @@ public class Distributor {
 	}
 
 	private Set<Cluster> initialize(int clusterCount) {
+		final int rolesPerCluster = (int) Math.ceil((double) expertiseSpace.getRoles().size() / clusterCount);
 		Set<Cluster> clusters = new HashSet<>();
 		var roleIterator = expertiseSpace.getRoles().iterator();
 		for (int k = 0; k < clusterCount; k++) {
 			Cluster cluster = new Cluster(k);
-			final int rolesPerCluster = (int) Math.ceil((double) expertiseSpace.getRoles().size() / clusterCount);
 			for (int i = 0; roleIterator.hasNext() && i < rolesPerCluster; i++) {
 				cluster.addRole(roleIterator.next());
 			}
@@ -89,6 +90,8 @@ public class Distributor {
 		Distributor distributor = new Distributor(space);
 		Set<Cluster> clusters = distributor.distribute(10);
 		clusters.forEach(System.out::println);
+		System.out.println("--------------------------------------------------------------------");
+		new SolutionValidator().validate(clusters);
 	}
 
 }

@@ -39,20 +39,29 @@ public class Cluster implements Iterable<Role> {
 		roles.remove(role);
 	}
 
+	public Set<Role> getRoles() {
+		return new HashSet<>(roles);
+	}
+
 	public Point getCentroid() {
-		Map<Integer, Integer> accumulatingMap = new HashMap<>();
-		for (var role : roles) {
-			for (var dimension : role.getPoint()) {
-				accumulatingMap.merge(dimension, 1, ACCUMULATOR);
-			}
-		}
+		Map<Integer, Integer> dimensionTotals = getDimensionTotals();
 		Point centroid = new Point();
-		for (var entry : accumulatingMap.entrySet()) {
+		for (var entry : dimensionTotals.entrySet()) {
 			if (2 * entry.getValue() >= roles.size()) {
 				centroid.set(entry.getKey());
 			}
 		}
 		return centroid;
+	}
+
+	private Map<Integer, Integer> getDimensionTotals() {
+		Map<Integer, Integer> dimensionTotals = new HashMap<>();
+		for (var role : roles) {
+			for (var dimension : role.getPoint()) {
+				dimensionTotals.merge(dimension, 1, ACCUMULATOR);
+			}
+		}
+		return dimensionTotals;
 	}
 
 	@Override
