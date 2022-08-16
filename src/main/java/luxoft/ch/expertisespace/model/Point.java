@@ -19,18 +19,19 @@ public class Point implements Iterable<Integer> {
 		bitSet = new BitSet(dimension);
 	}
 
+	public int getLength() {
+		return bitSet.length();
+	}
+
 	public boolean get(int index) {
+		if (index >= bitSet.size()) {
+			return false;
+		}
 		return bitSet.get(index);
 	}
 
 	public void set(int index) {
 		bitSet.set(index);
-	}
-
-	public int getDistance(Point point) {
-		BitSet clone = (BitSet) bitSet.clone();
-		clone.xor(point.bitSet);
-		return clone.cardinality();
 	}
 
 	@Override

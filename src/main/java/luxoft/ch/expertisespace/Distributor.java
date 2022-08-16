@@ -1,8 +1,6 @@
 package luxoft.ch.expertisespace;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import luxoft.ch.expertisespace.clustering.Cluster;
@@ -21,20 +19,17 @@ public class Distributor {
 
 	public Set<Cluster> distribute(int clusterCount) {
 		var clusters = initialize(clusterCount);
-		int pointsMoved = 0;
-		do {
-			var centroids = getCentroids(clusters);
-			pointsMoved = reassignPoints(clusters, centroids);
-		} while (pointsMoved > 0);
+		while (reassignPoints(clusters) > 0)
+			;
 		return clusters;
 	}
 
 	private Set<Cluster> initialize(int clusterCount) {
+		final int rolesPerCluster = (int) Math.ceil((double) expertiseSpace.getRolesCount() / clusterCount);
 		Set<Cluster> clusters = new HashSet<>();
-		var roleIterator = expertiseSpace.getRoles().iterator();
+		var roleIterator = expertiseSpace.iterator();
 		for (int k = 0; k < clusterCount; k++) {
 			Cluster cluster = new Cluster(k);
-			final int rolesPerCluster = (int) Math.ceil((double) expertiseSpace.getRoles().size() / clusterCount);
 			for (int i = 0; roleIterator.hasNext() && i < rolesPerCluster; i++) {
 				cluster.addRole(roleIterator.next());
 			}
@@ -43,24 +38,15 @@ public class Distributor {
 		return clusters;
 	}
 
-	private Map<Point, Cluster> getCentroids(Set<Cluster> clusters) {
-		Map<Point, Cluster> centroids = new HashMap<>();
-		for (var cluster : clusters) {
-			centroids.put(cluster.getCentroid(), cluster);
-		}
-		return centroids;
-	}
-
-	private int reassignPoints(Set<Cluster> clusters, Map<Point, Cluster> centroids) {
+	private int reassignPoints(Set<Cluster> clusters) {
 		int pointsMoved = 0;
 		for (var cluster : clusters) {
 			for (var roleIter = cluster.iterator(); roleIter.hasNext();) {
 				Role role = roleIter.next();
-				Point closestCentroid = findClosestCentroid(centroids, role.getPoint());
-				Cluster centroidCluster = centroids.get(closestCentroid);
-				if (cluster != centroidCluster) {
+				Cluster closestCentroidCluster = findClosestCentroidCluster(clusters, role.getPoint());
+				if (closestCentroidCluster != null && cluster != closestCentroidCluster) {
 					roleIter.remove();
-					centroidCluster.addRole(role);
+					closestCentroidCluster.addRole(role);
 					pointsMoved++;
 				}
 			}
@@ -68,23 +54,39 @@ public class Distributor {
 		return pointsMoved;
 	}
 
-	private Point findClosestCentroid(Map<Point, Cluster> centroids, Point point) {
-		Point centroid = null;
-		int minDistance = Integer.MAX_VALUE;
-		for (var c : centroids.keySet()) {
-			final int distance = point.getDistance(c);
-			if (distance < minDistance) {
-				minDistance = distance;
-				centroid = c;
+	private Cluster findClosestCentroidCluster(Set<Cluster> clusters, Point point) {
+		var iter = clusters.iterator();
+		if (iter.hasNext()) {
+			Cluster minDistanceCluster = iter.next();
+			int minDistance = minDistanceCluster.getCentroidToPointDistanceDividend(point);
+			while (iter.hasNext()) {
+				Cluster cluster = iter.next();
+				final int distance = cluster.getCentroidToPointDistanceDividend(point);
+				if (compareDistances(cluster, distance, minDistanceCluster, minDistance) < 0) {
+					minDistance = distance;
+					minDistanceCluster = cluster;
+				}
 			}
+			return minDistanceCluster;
 		}
-		return centroid;
+		return null;
+	}
+
+	private int compareDistances(Cluster cluster1, int distance1, Cluster cluster2, int distance2) {
+		final int firstOperand = distance1 * cluster2.size() * cluster2.size();
+		final int secondOperand = distance2 * cluster1.size() * cluster1.size();
+		if (firstOperand < secondOperand)
+			return -1;
+		if (firstOperand > secondOperand)
+			return 1;
+		return 0;
 	}
 
 	public static void main(String... args) {
 		Parser parser = new Parser("Java Flavors.csv");
 		ExpertiseSpace space = parser.parse();
-		System.out.println("number of expertise tokens %d:%n%s".formatted(space.getExpertiseTokenCount(), space.getExpertiseTokens()));
+		System.out.println("number of expertise tokens %d:%n%s".formatted(space.getExpertiseTokenCount(),
+				space.getExpertiseTokens()));
 		System.out.println("--------------------------------------------------------------------");
 		Distributor distributor = new Distributor(space);
 		Set<Cluster> clusters = distributor.distribute(10);

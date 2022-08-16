@@ -29,10 +29,6 @@ public class Role implements Comparable<Role> {
 		return point;
 	}
 
-	public void set(int index) {
-		point.set(index);
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Role p) {

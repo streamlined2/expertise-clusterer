@@ -1,58 +1,69 @@
 package luxoft.ch.expertisespace.clustering;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
-import java.util.function.BinaryOperator;
 
 import luxoft.ch.expertisespace.model.Point;
 import luxoft.ch.expertisespace.model.Role;
 
 public class Cluster implements Iterable<Role> {
 
-	private static final BinaryOperator<Integer> ACCUMULATOR = (oldValue, value) -> oldValue + value;
-
 	private final int id;
 	private final Set<Role> roles;
+	private final List<Integer> dimensionTotals;
 
 	public Cluster(int id) {
 		this.id = id;
 		roles = new HashSet<>();
+		dimensionTotals = new ArrayList<>();
 	}
 
 	public Cluster(int id, String... roleName) {
-		this.id = id;
-		roles = new HashSet<>();
+		this(id);
 		Arrays.asList(roleName).stream().map(Role::new).forEach(this::addRole);
 	}
 
 	public void addRole(Role role) {
 		roles.add(role);
+		role.getPoint().forEach(this::increaseDimensionTotal);
 	}
 
-	public void removeRole(Role role) {
-		roles.remove(role);
+	private void increaseDimensionTotal(int dimension) {
+		ensureDimensionTotalsSize(dimension);
+		dimensionTotals.set(dimension, dimensionTotals.get(dimension) + 1);
 	}
 
-	public Point getCentroid() {
-		Map<Integer, Integer> accumulatingMap = new HashMap<>();
-		for (var role : roles) {
-			for (var dimension : role.getPoint()) {
-				accumulatingMap.merge(dimension, 1, ACCUMULATOR);
-			}
+	private void ensureDimensionTotalsSize(int dimension) {
+		while (dimension >= dimensionTotals.size()) {
+			dimensionTotals.add(0);
 		}
-		Point centroid = new Point();
-		for (var entry : accumulatingMap.entrySet()) {
-			if (2 * entry.getValue() >= roles.size()) {
-				centroid.set(entry.getKey());
-			}
+	}
+
+	private void decreaseDimensionTotal(int dimension) {
+		ensureDimensionTotalsSize(dimension);
+		dimensionTotals.set(dimension, dimensionTotals.get(dimension) - 1);
+	}
+
+	public int getCentroidToPointDistanceDividend(Point point) {
+		int squareTotal = 0;
+		final int maxDimension = Math.max(dimensionTotals.size(), point.getLength());
+		ensureDimensionTotalsSize(maxDimension);
+		for (int dimension = 0; dimension < maxDimension; dimension++) {
+			final int part = point.get(dimension) ? (roles.size() - dimensionTotals.get(dimension))
+					: dimensionTotals.get(dimension);
+			squareTotal += part * part;
 		}
-		return centroid;
+		return squareTotal;
+	}
+
+	public int size() {
+		return roles.size();
 	}
 
 	@Override
@@ -85,6 +96,7 @@ public class Cluster implements Iterable<Role> {
 		return new Iterator<Role>() {
 
 			private final Iterator<Role> iterator = roles.iterator();
+			private Role lastRole;
 
 			@Override
 			public boolean hasNext() {
@@ -93,11 +105,15 @@ public class Cluster implements Iterable<Role> {
 
 			@Override
 			public Role next() {
-				return iterator.next();
+				lastRole = iterator.next();
+				return lastRole;
 			}
 
 			@Override
 			public void remove() {
+				if (lastRole == null)
+					throw new IllegalStateException("'next' should be called first before removal");
+				lastRole.getPoint().forEach(Cluster.this::decreaseDimensionTotal);
 				iterator.remove();
 			}
 
