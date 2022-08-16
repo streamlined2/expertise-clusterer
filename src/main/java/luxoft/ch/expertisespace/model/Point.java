@@ -34,12 +34,6 @@ public class Point implements Iterable<Integer> {
 		bitSet.set(index);
 	}
 
-	public int getDistance(Point point) {
-		BitSet clone = (BitSet) bitSet.clone();
-		clone.xor(point.bitSet);
-		return clone.cardinality();
-	}
-
 	@Override
 	public String toString() {
 		StringJoiner join = new StringJoiner(",", "[", "]");

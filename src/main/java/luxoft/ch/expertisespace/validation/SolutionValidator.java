@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import luxoft.ch.expertisespace.clustering.Cluster;
-import luxoft.ch.expertisespace.model.Point;
 import luxoft.ch.expertisespace.model.Role;
 
 public class SolutionValidator {
@@ -38,15 +37,11 @@ public class SolutionValidator {
 	}
 
 	public double calculateIntraClusterDistance(Cluster cluster) {
-		int distance = 0;
-		for (Role role1 : cluster) {
-			Point point1 = role1.getPoint();
-			for (Role role2 : cluster) {
-				Point point2 = role2.getPoint();
-				distance += point1.getDistance(point2);
-			}
+		double distance = 0;
+		for (Role role : cluster) {
+			distance += cluster.getCentroidToPointDistanceDividend(role.getPoint());
 		}
-		return ((double) distance) / cluster.size();
+		return distance / (cluster.size() * cluster.size() * cluster.size());
 	}
 
 }
