@@ -29,9 +29,18 @@ public class Cluster implements Iterable<Role> {
 		Arrays.asList(roleName).stream().map(Role::new).forEach(this::addRole);
 	}
 
+	public Set<Role> getRoles() {
+		return Set.copyOf(roles);
+	}
+
 	public void addRole(Role role) {
 		roles.add(role);
 		role.getPoint().forEach(this::increaseDimensionTotal);
+	}
+
+	public void removeRole(Role role) {
+		roles.remove(role);
+		role.getPoint().forEach(this::decreaseDimensionTotal);
 	}
 
 	private void increaseDimensionTotal(int dimension) {

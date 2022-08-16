@@ -8,6 +8,7 @@ import luxoft.ch.expertisespace.model.ExpertiseSpace;
 import luxoft.ch.expertisespace.model.Point;
 import luxoft.ch.expertisespace.model.Role;
 import luxoft.ch.expertisespace.parsing.Parser;
+import luxoft.ch.expertisespace.validation.SolutionValidator;
 
 public class Distributor {
 
@@ -91,6 +92,8 @@ public class Distributor {
 		Distributor distributor = new Distributor(space);
 		Set<Cluster> clusters = distributor.distribute(10);
 		clusters.forEach(System.out::println);
+		System.out.println("--------------------------------------------------------------------");
+		new SolutionValidator().validate(clusters);
 	}
 
 }
