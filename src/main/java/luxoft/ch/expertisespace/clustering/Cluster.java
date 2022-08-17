@@ -61,9 +61,9 @@ public class Cluster implements Iterable<Role> {
 
 	public int getCentroidToPointDistanceDividend(Point point) {
 		int squareTotal = 0;
-		final int maxDimension = Math.max(dimensionTotals.size(), point.getLength());
-		ensureDimensionTotalsSize(maxDimension);
-		for (int dimension = 0; dimension < maxDimension; dimension++) {
+		final int size = Math.max(dimensionTotals.size(), point.getLength());
+		ensureDimensionTotalsSize(size - 1);
+		for (int dimension = 0; dimension < size; dimension++) {
 			final int part = point.get(dimension) ? (roles.size() - dimensionTotals.get(dimension))
 					: dimensionTotals.get(dimension);
 			squareTotal += part * part;
