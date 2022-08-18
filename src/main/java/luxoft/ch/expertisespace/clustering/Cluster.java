@@ -2,9 +2,9 @@ package luxoft.ch.expertisespace.clustering;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -15,12 +15,12 @@ import luxoft.ch.expertisespace.model.Role;
 public class Cluster implements Iterable<Role> {
 
 	private final int id;
-	private final Set<Role> roles;
+	private final List<Role> roles;
 	private final List<Integer> dimensionTotals;
 
 	public Cluster(int id) {
 		this.id = id;
-		roles = new HashSet<>();
+		roles = new ArrayList<>();
 		dimensionTotals = new ArrayList<>();
 	}
 
@@ -100,33 +100,78 @@ public class Cluster implements Iterable<Role> {
 		return builder.toString();
 	}
 
+	private class RoleIterator implements ListIterator<Role> {
+
+		private final ListIterator<Role> iterator = roles.listIterator();
+		private Role lastRole;
+
+		@Override
+		public boolean hasNext() {
+			return iterator.hasNext();
+		}
+
+		@Override
+		public Role next() {
+			lastRole = iterator.next();
+			return lastRole;
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return iterator.hasPrevious();
+		}
+
+		@Override
+		public Role previous() {
+			lastRole = iterator.previous();
+			return lastRole;
+		}
+
+		@Override
+		public int nextIndex() {
+			return iterator.nextIndex();
+		}
+
+		@Override
+		public int previousIndex() {
+			return iterator.previousIndex();
+		}
+
+		private void checkState() {
+			if (lastRole == null)
+				throw new IllegalStateException("'next' or 'previous' should be called first before modification");
+		}
+
+		@Override
+		public void remove() {
+			checkState();
+			lastRole.getPoint().forEach(Cluster.this::decreaseDimensionTotal);
+			iterator.remove();
+		}
+
+		@Override
+		public void set(Role e) {
+			checkState();
+			lastRole.getPoint().forEach(Cluster.this::decreaseDimensionTotal);
+			e.getPoint().forEach(Cluster.this::increaseDimensionTotal);
+			iterator.set(e);
+		}
+
+		@Override
+		public void add(Role e) {
+			e.getPoint().forEach(Cluster.this::increaseDimensionTotal);
+			iterator.add(e);
+		}
+
+	}
+
 	@Override
 	public Iterator<Role> iterator() {
-		return new Iterator<Role>() {
+		return listIterator();
+	}
 
-			private final Iterator<Role> iterator = roles.iterator();
-			private Role lastRole;
-
-			@Override
-			public boolean hasNext() {
-				return iterator.hasNext();
-			}
-
-			@Override
-			public Role next() {
-				lastRole = iterator.next();
-				return lastRole;
-			}
-
-			@Override
-			public void remove() {
-				if (lastRole == null)
-					throw new IllegalStateException("'next' should be called first before removal");
-				lastRole.getPoint().forEach(Cluster.this::decreaseDimensionTotal);
-				iterator.remove();
-			}
-
-		};
+	public ListIterator<Role> listIterator() {
+		return new RoleIterator();
 	}
 
 }

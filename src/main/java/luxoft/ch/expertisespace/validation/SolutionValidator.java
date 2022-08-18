@@ -41,7 +41,7 @@ public class SolutionValidator {
 		for (Role role : cluster) {
 			distance += cluster.getCentroidToPointDistanceDividend(role.getPoint());
 		}
-		return distance / (cluster.size() * cluster.size() * cluster.size());
+		return distance / (cluster.size() * cluster.size());
 	}
 
 }

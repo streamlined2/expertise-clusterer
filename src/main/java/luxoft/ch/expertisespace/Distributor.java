@@ -42,13 +42,15 @@ public class Distributor {
 	private int reassignPoints(Set<Cluster> clusters) {
 		int pointsMoved = 0;
 		for (var cluster : clusters) {
-			for (var roleIter = cluster.iterator(); roleIter.hasNext();) {
+			for (var roleIter = cluster.listIterator(); roleIter.hasNext();) {
 				Role role = roleIter.next();
+				roleIter.remove();
 				Cluster closestCentroidCluster = findClosestCentroidCluster(clusters, role.getPoint());
 				if (closestCentroidCluster != null && cluster != closestCentroidCluster) {
-					roleIter.remove();
 					closestCentroidCluster.addRole(role);
 					pointsMoved++;
+				} else {
+					roleIter.add(role);
 				}
 			}
 		}
